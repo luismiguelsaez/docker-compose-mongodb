@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  mongo-1:
+    image: mongo:4 
+    volumes:
+      - ./rs.js:/rs.js
+    command: --replSet testRS
+  mongo-2:
+    image: mongo:4
+    command: --replSet testRS
+  mongo-3:
+    image: mongo:4
+    command: --replSet testRS
