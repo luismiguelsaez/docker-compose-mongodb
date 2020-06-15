@@ -18,6 +18,6 @@ $ docker-compose up -d
 
 ### Initialize RS
 ```
-$ docker-compose exec mongo-1 mongo localhost:27017 /rs.js
-$ docker-compose exec mongo-1 mongo localhost:27017 --eval "rs.status()"
+$ docker-compose exec mongo-1 mongo localhost:27017 --quiet /rs.js
+$ docker-compose exec mongo-1 mongo localhost:27017 --quiet --eval "rs.status()"
 ```

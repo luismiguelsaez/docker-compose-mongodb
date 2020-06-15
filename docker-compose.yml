@@ -1,4 +1,5 @@
 version: "3.8"
+
 services:
   mongo-1:
     image: mongo:4
@@ -11,7 +12,7 @@ services:
       - type: volume
         source: mongo-1-data
         target: /data/db
-    command: --replSet testRS
+    command: --replSet testRS --storageEngine wiredTiger
   mongo-2:
     image: mongo:4
     networks:
@@ -20,7 +21,7 @@ services:
       - type: volume
         source: mongo-2-data
         target: /data/db
-    command: --replSet testRS
+    command: --replSet testRS --storageEngine wiredTiger
   mongo-3:
     image: mongo:4
     networks:
@@ -29,9 +30,11 @@ services:
       - type: volume
         source: mongo-3-data
         target: /data/db
-    command: --replSet testRS
+    command: --replSet testRS --storageEngine wiredTiger
+
 networks:
   mongodb:
+
 volumes:
   mongo-1-data:
   mongo-2-data:
