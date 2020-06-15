@@ -6,9 +6,6 @@ services:
     networks:
       - mongodb
     volumes:
-      - type: bind
-        source: ./rs.js
-        target: /rs.js
       - type: volume
         source: mongo-1-data
         target: /data/db
@@ -31,6 +28,19 @@ services:
         source: mongo-3-data
         target: /data/db
     command: --replSet testRS --storageEngine wiredTiger
+  mongo-initializer:
+    depends_on:
+      - mongo-1
+      - mongo-2
+      - mongo-3
+    image: mongo:4
+    networks:
+      - mongodb
+    volumes:
+      - type: bind
+        source: ./rs.js
+        target: /rs.js
+    entrypoint: mongo mongo-1:27017 --quiet /rs.js
 
 networks:
   mongodb:
